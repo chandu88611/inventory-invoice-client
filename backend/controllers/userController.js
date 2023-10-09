@@ -11,7 +11,7 @@ const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1d" });
 };
 
-// Register User
+
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -24,7 +24,7 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Password must be up to 6 characters");
   }
-
+// Register User
   // Check if user email already exists
   const userExists = await User.findOne({ email });
 
