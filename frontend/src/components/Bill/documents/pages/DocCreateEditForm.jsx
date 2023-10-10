@@ -228,7 +228,7 @@ const DocCreateEditForm = () => {
       }
     } else {
       try {
-        await createDoc({
+        await axios.post("http://localhost:5000/api/document/create",{
           ...docData,
           billingItems: [...items],
           documentType,
@@ -241,7 +241,7 @@ const DocCreateEditForm = () => {
           currency,
           status,
           paymentRecords: [],
-        });
+        },);
       } catch (err) {
         const message = err.data.message;
         toast.error(message);

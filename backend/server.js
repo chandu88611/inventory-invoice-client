@@ -7,6 +7,7 @@ const userRoute = require("./routes/userRoute");
 const productRoute = require("./routes/productRoute");
 const contactRoute = require("./routes/contactRoute");
 const customerRoute = require("./routes/customerRoute");
+const documentRoute = require("./routes/documentRoutes");
 const errorHandler = require("./middleWare/errorMiddleware");
 const cookieParser = require("cookie-parser");
 const path = require("path");
@@ -32,6 +33,7 @@ app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
 app.use("/api/contactus", contactRoute);
 app.use("/api/customer", customerRoute);
+app.use("/api/document/create", documentRoute);
 
 // Routes
 app.get("/", (req, res) => {

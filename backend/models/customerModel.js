@@ -12,19 +12,19 @@ const customerSchema = new Schema(
 			required: true,
 			trim: true,
 		},
-		email: {
-			type: String,
-			lowercase: true,
-			unique: true,
-		},
-		accountNo: String,
-		vatTinNo: {
-			type: Number,
-			default: 0,
-		},
-		address: String,
-		city: String,
-		country: String,
+		// email: {
+		// 	type: String,
+		// 	lowercase: true,
+		// 	unique: true,
+		// },
+		// accountNo: String,
+		// vatTinNo: {
+		// 	type: Number,
+		// 	default: 0,
+		// },
+		// address: String,
+		// city: String,
+		// country: String,
 		phoneNumber: {
 			type: String,
 			required: true,
