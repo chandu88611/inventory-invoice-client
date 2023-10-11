@@ -42,21 +42,12 @@ import StyledContainer from "../../../components/StyledContainer";
 import StyledDivider from "../../../components/StyledDivider";
 import StyledTableCell from "../../../components/StyledTableCell";
 import StyledTableRow from "../../../components/StyledTableRow";
-// import currencies from "../../../world_currencies.json";
-// import {
-// 	useCreateDocMutation,
-// 	useGetSingleDocQuery,
-// 	useUpdateDocMutation,
-// } from "../documentsApiSlice";
-
-// import { useGetAllUserCustomersQuery } from "../../customers/customersApiSlice";
 import { addCurrencyCommas } from "./components/addCurrencyCommas";
 import DocumentType from "./components/DocumentType";
 import { docInitialState, itemsInitialState } from "./initialState";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../../../redux/features/product/productSlice";
 import { selectIsLoggedIn } from "../../../../redux/features/auth/authSlice";
-import { HandshakeOutlined } from "@mui/icons-material";
 import axios from "axios";
 
 const StyledItemButton = styled(Button)({
@@ -228,7 +219,7 @@ const DocCreateEditForm = () => {
       }
     } else {
       try {
-        await axios.post("http://localhost:5000/api/document/create",{
+       const res= await axios.post("http://localhost:5000/api/document/create",{
           ...docData,
           billingItems: [...items],
           documentType,
@@ -242,40 +233,30 @@ const DocCreateEditForm = () => {
           status,
           paymentRecords: [],
         },);
+        // http://localhost:5000/api/document/create/generatepdf
+        if(res?.data?.success){
+          try {
+            await axios.post(" http://localhost:5000/api/document/create/generatepdf",{profile:{
+          businessName:"BEEPEPLE",
+          phoneNumber:"8861151876",
+          email:"beepeeple@gmail.com",
+          address:'YT road,opposite to SBI bank ,Tiptur ',
+          city:'Tumkur',
+          country:'India'
+        },document:res?.data?.newDocument},);
+          } catch (error) {
+            const message = error.data.message;
+            toast.error(message);
+          }
+         
+      }
       } catch (err) {
         const message = err.data.message;
         toast.error(message);
       }
     }
   };
-  // const handleProductNameChange = (e,index) => {
-  // 	const productName = e.target.value;
-  // 	const selectedProduct = products.find((product) => product.name === productName);
 
-  // 	if (selectedProduct) {
-  // 	  setItems((currentItems) =>
-  // 		produce(currentItems, (v) => {
-  // 		  v[index].itemName = productName;
-  // 		  v[index].unitPrice = selectedProduct.price;
-  // 		})
-  // 	  );
-  // 	}
-  //   };
-  // const handleProductNameChange = (e, index) => {
-  // 	const productName = e.target.value;
-  // 	const selectedProduct = products.find((product) => product.name === productName);
-
-  // 	if (selectedProduct) {
-  // 	  setItems((currentItems) => {
-  // 		const newItems = produce(currentItems, (v) => {
-  // 		  v[index].itemName = productName;
-  // 		  v[index].unitPrice = selectedProduct.price;
-  // 		});
-  // 		console.log(newItems); // Check the logged values
-  // 		return newItems;
-  // 	  });
-  // 	}
-  //   };
 
   const [customer1, setCustomer1] = useState();
   const getAllCustomers = async () => {
