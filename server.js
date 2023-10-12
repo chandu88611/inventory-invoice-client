@@ -35,11 +35,14 @@ app.use("/api/contactus", contactRoute);
 app.use("/api/customer", customerRoute);
 app.use("/api/document/create", documentRoute);
 
-// Routes
+app.use(express.static(path.join(__dirname, "./client/build")));
+// Routes 
 app.get("/", (req, res) => {
   res.send("Home Page");
 });
-
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
 // Error Middleware
 app.use(errorHandler);
 // Connect to DB and start server
