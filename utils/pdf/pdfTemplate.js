@@ -9,9 +9,7 @@ function addCurrencyCommas(currency) {
 module.exports= function ({
                              profile,
                              document,
-                             balanceDue,
-                             status,
-                             totalAmountReceived,
+                  
                          }) {
     return `
 	<!DOCTYPE html>
@@ -104,9 +102,8 @@ module.exports= function ({
              </div>
              <div class="right">
                  <h2 style="font-size: 38px; font-weight:200; font-family: Arial, Helvetica, sans-serif;">${
-        Number(balanceDue) <= 0
-            ? "Receipt"
-            : document?.documentType
+         "Receipt"
+           
     }</h2>
                  <h6 style="font-size: 18px; font-family: Arial, Helvetica, sans-serif; color:#5a5a5a;">
                    <b> No: ${document?.documentNumber}</b>
@@ -146,7 +143,7 @@ module.exports= function ({
        <div class="column">
          <h3 style="font-size: 14px; text-transform: uppercase;"> <strong>Payment Status: </strong></h3>
          <h4 style="font-size: 12px">${
-        totalAmountReceived >= document?.total ? "Paid" : status
+        "Paid" 
     }
      </h4>
      <p class="header">Issued on:</p>
@@ -159,7 +156,7 @@ module.exports= function ({
      </p>
      <p class="header">Total Amount:</p>
      <p>
-       <b><span style="font-size: 16px">${document?.currency}</span></b>
+       <b><span style="font-size: 16px">₹</span></b>
        <b><span style="font-size: 16px">${addCurrencyCommas(
         document?.total?.toFixed(2)
     )}</span></b>
@@ -201,9 +198,9 @@ module.exports= function ({
              <tr>
                <td style="font-size: 10px">Sub Total:</td>
                <td style="text-align: right; font-size: 10px; font-weight: 700">${
-        document?.currency
+                '₹'
     }
-                 ${addCurrencyCommas(document?.subTotal?.toFixed(2))}
+                 
                  </td>
              </tr>
              <tr>
@@ -211,7 +208,7 @@ module.exports= function ({
         document?.rates
     }%):</td>
                <td style="text-align: right; font-size: 10px; font-weight: 700">${
-        document?.currency
+'₹'
     }
                  ${document?.salesTax?.toFixed(1)}
                  </td>
@@ -219,7 +216,7 @@ module.exports= function ({
               <tr>
                <td style="font-size: 10px">Cumulative Total:</td>
                <td style="text-align: right; font-size: 10px; font-weight: 700">${
-        document?.currency
+'₹'
     }
                  ${addCurrencyCommas(document?.total?.toFixed(2))}
                  </td>
@@ -227,22 +224,14 @@ module.exports= function ({
               <tr>
                <td style="font-size: 10px">Amount Paid:</td>
                <td style="text-align: right; font-size: 10px; font-weight: 700">${
-        document?.currency
+      "₹"
     }
-                 ${addCurrencyCommas(totalAmountReceived?.toFixed(2))}
+                 ${addCurrencyCommas(document?.total?.toFixed(2))}
                  </td>
              </tr>
              <tr>
                <td style="font-size: 10px">Balance:</td>
-               <td style="text-align: right; font-size: 10px; font-weight: 700">${
-        document?.currency
-    }
-                 ${addCurrencyCommas(
-        Math?.round(
-            document?.total -
-            totalAmountReceived
-        ).toFixed(2)
-    )}
+               <td style="text-align: right; font-size: 10px; font-weight: 700">${addCurrencyCommas(document?.total?.toFixed(2))}
                  </td>
              </tr>
            </table>

@@ -1,10 +1,12 @@
 const asyncHandler =require( "express-async-handler")
 const Customer=require( "../../models/customerModel.js")
-const Document=require( "../../models/documentModel.js")
+const Document=require( "../../models/documentModel.js");
+const { generatePDF } = require("./generatePDF.js");
 
 // $-title   Create Document
 // $-path    POST /api/v1/document/create
 // $-auth    Private
+
 
 const createDocument = asyncHandler(async (req, res) => {
 	const customer = await Customer.findOne({ createdBy: req.user._id });
@@ -40,6 +42,7 @@ console.log(customer)
 	res.status(200).json({
 		success: true,
 		newDocument,
+		
 	});
 });
 

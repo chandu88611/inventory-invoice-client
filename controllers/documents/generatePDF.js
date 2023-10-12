@@ -36,7 +36,6 @@ const dirname = path.resolve();
 // };
 
  const generatePDF = async (req, res) => {
-
 	const timestamp = Date.now();
 	const dynamicFilename = `document_${timestamp}.pdf`;
 	const filepath = path.join(dirname,`/uploads/${dynamicFilename}`);
